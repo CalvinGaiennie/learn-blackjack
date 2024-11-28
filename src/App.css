@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+#strategy {
+  margin-left: 10vw;
+}
+.card {
+  border: 2px solid black;
+  width: 80px;
+  height: 100px;
+  margin: 10px;
+}
+
+.flex {
+  display: flex;
+}
+
+.hand {
+  text-align: left;
+}
+
+button {
+  margin: 2vw;
+}
