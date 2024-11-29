@@ -43,13 +43,25 @@ export function Blackjack() {
       (accumulator, currentValue) => accumulator + currentValue,
       0
     );
+    if (handTotal > 21) {
+      alert(`${hand} busts.`);
+      startNewGame();
+    }
     if (hand === "dealer") {
       console.log("Dealer Hand", handTotal);
     } else if (hand === "player") {
       console.log("Player Hand", handTotal);
     }
+    return handTotal;
   }
-
+  function dealerTurn() {
+    const total = checkHand("dealer", dealerCards);
+    if (total < 17) {
+      const newHand = dealCard("dealer");
+      console.log(newHand);
+      alert(` newest dealer hand:${newHand}`);
+    }
+  }
   return (
     <div>
       <DealerHand dealerCards={dealerCards} />
@@ -57,7 +69,7 @@ export function Blackjack() {
       <GameControls
         onDealCard={dealCard}
         onStartNewGame={startNewGame}
-        onCheckHand={checkHand}
+        onDealerTurn={dealerTurn}
       />
     </div>
   );
