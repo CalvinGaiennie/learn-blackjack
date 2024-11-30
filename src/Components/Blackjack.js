@@ -9,6 +9,7 @@ export function Blackjack() {
     setPlayerCards([]);
     dealCard("player");
     dealCard("dealer");
+    dealCard("player");
     dealCard("dealer");
   }
 
