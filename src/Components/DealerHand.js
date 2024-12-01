@@ -6,7 +6,15 @@ export function DealerHand({ dealerCards }) {
         <p className="card" key={1}>
           {dealerCards[0]}
         </p>
-        <p className="card"></p>
+        {dealerCards.map((card, index) => {
+          if (index !== 0) {
+            return (
+              <p className="card" key={index}>
+                {card}
+              </p>
+            );
+          }
+        })}
       </div>
     </div>
   );

@@ -4,6 +4,18 @@ import { PlayerHand } from "./PlayerHand";
 import { DealerHand } from "./DealerHand";
 
 export function Blackjack() {
+  ///////////////////////////////////////////////////
+  //State
+  const [dealerCards, setDealerCards] = useState([]);
+  const [playerCards, setPlayerCards] = useState([]);
+  const [gameStatus, setGameStatus] = useState("");
+
+  /////////////////////////////////////////////////
+  //Variables
+  const possibleCards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11];
+
+  ///////////////////////////////////???//////////////
+  //functions
   function startNewGame() {
     setDealerCards([]);
     setPlayerCards([]);
@@ -11,12 +23,8 @@ export function Blackjack() {
     dealCard("dealer");
     dealCard("player");
     dealCard("dealer");
+    setGameStatus("");
   }
-
-  const [dealerCards, setDealerCards] = useState([]);
-  const [playerCards, setPlayerCards] = useState([]);
-
-  const possibleCards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11];
 
   function dealCard(hand) {
     const randomNumber = Math.floor(Math.random() * 12);
@@ -25,14 +33,12 @@ export function Blackjack() {
     if (hand === "dealer") {
       setDealerCards((prevCards) => {
         const updatedCards = [...prevCards, card];
-        console.log("Dealer Card:", card);
         checkHand("dealer", updatedCards);
         return updatedCards;
       });
     } else if (hand === "player") {
       setPlayerCards((prevCards) => {
         const updatedCards = [...prevCards, card];
-        console.log("Player Card:", card);
         checkHand("player", updatedCards);
         return updatedCards;
       });
@@ -45,23 +51,24 @@ export function Blackjack() {
       0
     );
     if (handTotal > 21) {
-      alert(`${hand} busts.`);
-      startNewGame();
+      setGameStatus(`${hand} busts`);
     }
-    if (hand === "dealer") {
-      console.log("Dealer Hand", handTotal);
-    } else if (hand === "player") {
-      console.log("Player Hand", handTotal);
-    }
+
     return handTotal;
   }
   function dealerTurn() {
     const total = checkHand("dealer", dealerCards);
+    let updatedCards;
     if (total < 17) {
-      const newHand = dealCard("dealer");
-      console.log(newHand);
-      alert(` newest dealer hand:${newHand}`);
+      updatedCards = dealCard("dealer");
     }
+    checkForWinner(updatedCards);
+  }
+
+  function checkForWinner(updatedDealerCards) {
+    const playerTotal = checkHand("player", playerCards);
+    const dealerTotal = checkHand("dealer", updatedDealerCards || dealerCards);
+    console.log("endgame", playerTotal, dealerTotal);
   }
   return (
     <div>
@@ -71,6 +78,8 @@ export function Blackjack() {
         onDealCard={dealCard}
         onStartNewGame={startNewGame}
         onDealerTurn={dealerTurn}
+        gameStatus={gameStatus}
+        onGameStatus={setGameStatus}
       />
     </div>
   );
