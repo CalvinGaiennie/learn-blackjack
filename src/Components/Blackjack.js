@@ -68,6 +68,16 @@ export function Blackjack() {
   function checkForWinner(updatedDealerCards) {
     const playerTotal = checkHand("player", playerCards);
     const dealerTotal = checkHand("dealer", updatedDealerCards || dealerCards);
+    //I need to fix the stale state issue ////////
+    if (playerTotal > dealerTotal) {
+      setGameStatus(
+        `Player Wins! Player Total: ${playerTotal}. Dealer total: ${dealerTotal}. `
+      );
+    } else {
+      setGameStatus(
+        `Dealer Wins! Dealer total: ${dealerTotal}. Player Total: ${playerTotal}.`
+      );
+    }
     console.log("endgame", playerTotal, dealerTotal);
   }
   return (
