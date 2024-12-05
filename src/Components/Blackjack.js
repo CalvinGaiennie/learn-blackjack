@@ -71,14 +71,22 @@ export function Blackjack() {
     //I need to fix the stale state issue ////////
     if (playerTotal > dealerTotal) {
       setGameStatus(
-        `Player Wins! Player Total: ${playerTotal}. Dealer total: ${dealerTotal}. `
+        () =>
+          `Player Wins! Player Total: ${playerTotal}. Dealer total: ${dealerTotal}. `
       );
     } else {
       setGameStatus(
-        `Dealer Wins! Dealer total: ${dealerTotal}. Player Total: ${playerTotal}.`
+        () =>
+          `Dealer Wins! Dealer total: ${dealerTotal}. Player Total: ${playerTotal}.`
       );
     }
-    console.log("endgame", playerTotal, dealerTotal);
+    console.log(
+      "endgame",
+      "Player Total:",
+      playerTotal,
+      "Dealer Total:",
+      dealerTotal
+    );
   }
   return (
     <div>
