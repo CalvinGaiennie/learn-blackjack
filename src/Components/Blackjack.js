@@ -4,17 +4,14 @@ import { PlayerHand } from "./PlayerHand";
 import { DealerHand } from "./DealerHand";
 
 export function Blackjack() {
-  ///////////////////////////////////////////////////
   //State
   const [dealerCards, setDealerCards] = useState([]);
   const [playerCards, setPlayerCards] = useState([]);
   const [gameStatus, setGameStatus] = useState("");
 
-  /////////////////////////////////////////////////
   //Variables
   const possibleCards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11];
 
-  ///////////////////////////////////???//////////////
   //functions
   function startNewGame() {
     setDealerCards([]);
